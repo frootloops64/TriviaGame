@@ -15,3 +15,14 @@ buildQuiz();
 
 
 submitButton.addEventListener('click', showResults);
+
+var questions = [
+    {
+        question: 
+        answers: {
+
+        }
+    }
+
+
+];
