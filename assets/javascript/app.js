@@ -1,3 +1,49 @@
+function buildQuiz() {
+    var output = [];
+
+    questions.forEach((currentQuestion, questionNumber) => {
+        var answers = [];
+
+        for (letter in currentQuestion.answers) {
+            answers.push(
+                `<label>
+                <input type="radio" name="question${questionNumber}" value="${letter}">
+                ${letter} :
+                ${currentQuestion.answers[letter]}
+                </label>`
+            );
+        }
+        output.push(
+            `<div class="question"> ${currentQuestion.question} </div>
+            <div class="answers"> ${answers.join("")} </div>`
+        );
+    });
+    quizContainer.innerHTML = output.join("");
+}
+
+function showResults() {
+    var answerContainers = quizContainer.querySelectorAll(".answers");
+
+    var numberCorrect = 0;
+
+    questions.forEach((currentQuestion, questionNumber) => {
+        var answerContainer = answerContainers[questionNumber];
+        var selector = `input[name=question${questionNumber}]:checked`;
+        var userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+        if (userAnswer === currentQuestion.correctAnswer) {
+            numberCorrect++;
+           
+        } 
+    });
+
+    resultsContainer.innerHTML = `${numberCorrect} out of ${questions.length}`;
+}
+
+var quizContainer = document.getElementById("quiz");
+var resultsContainer = document.getElementById("results");
+var submitButton = document.getElementById("submit");
+
 var questions = [{
         question: "Which player in the men's tour has the most grand slam singles titles?",
         answers: {
@@ -34,18 +80,7 @@ var questions = [{
         correctAnswer: "a"
     }
 ];
-console.log(questions.length);
 
-$("#start-button").on('click', function () {
-    $(this).parent().hide();
-    $(".container").show();
-    countdown(20);
-    displayQuestions();
-});
+buildQuiz();
 
-var displayQuestions = function () {
-    for (i = 0; i < 4; i++) {
-        $(".questions").prepend('<div class="' + question[i].name + '"></div>');
-        $(questions[i].divClass).append('<div class=')
-    }
-}
+submitButton.addEventListener("click", showResults);
