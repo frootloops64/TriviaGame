@@ -1,48 +1,4 @@
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-
-fucntion buildQuiz() {
-    var output = [];
-
-
-    questions.forEach(
-        (currentQuestion, questionNumber) => {
-            var answers = [];
-
-            for(letter in currentQuestion.answers) {
-                answers.push(
-                    `<lable>
-                    <input type="radio" name="question${questionNumber}" value="${letter}">
-                    ${letter} :
-                    ${currentQuestion.answers[letter]}
-                    </lable>`
-                );
-            }
-
-            output.push(
-                `<div class="question"> ${currentQuestion.question} </div>
-                <div class="answers"> ${answers.join('')} </div>`
-            );
-
-        }
-
-    );
-    quizContainer.innerHTML = output.join('');
-}
-
-
-function showResults() {
-
-}
-
-buildQuiz();
-
-
-submitButton.addEventListener('click', showResults);
-
-var questions = [
-    {
+var questions = [{
         question: "Which player in the men's tour has the most grand slam singles titles?",
         answers: {
             a: "Rafael Nadal",
@@ -78,3 +34,18 @@ var questions = [
         correctAnswer: "a"
     }
 ];
+console.log(questions.length);
+
+$("#start-button").on('click', function () {
+    $(this).parent().hide();
+    $(".container").show();
+    countdown(20);
+    displayQuestions();
+});
+
+var displayQuestions = function () {
+    for (i = 0; i < 4; i++) {
+        $(".questions").prepend('<div class="' + question[i].name + '"></div>');
+        $(questions[i].divClass).append('<div class=')
+    }
+}
