@@ -4,6 +4,8 @@ function buildQuiz() {
     questions.forEach((currentQuestion, questionNumber) => {
         var answers = [];
 
+        // I don't know how to get the radio tag into each element
+        // not my code----------------------------------------------------------------
         for (letter in currentQuestion.answers) {
             answers.push(
                 `<label>
@@ -19,6 +21,7 @@ function buildQuiz() {
         );
     });
     quizContainer.innerHTML = output.join("");
+    // -----------------------------------------------------------
 }
 
 function showResults() {
@@ -28,15 +31,18 @@ function showResults() {
 
     questions.forEach((currentQuestion, questionNumber) => {
         var answerContainer = answerContainers[questionNumber];
+        // I don't know how to check the radio button that user selects and 
+        // capture the user's answer, not my code -------------------------
         var selector = `input[name=question${questionNumber}]:checked`;
         var userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
+        // ----------------------------------------------------------------------
         if (userAnswer === currentQuestion.correctAnswer) {
             numberCorrect++;
            
         } 
     });
 
+    // poor use of template literals :( 
     resultsContainer.innerHTML = `${numberCorrect} out of ${questions.length}`;
 }
 
