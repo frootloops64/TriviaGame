@@ -87,6 +87,29 @@ var questions = [{
     }
 ];
 
+// don't know how to properly use set to count down
+$("#start").on("click", function() {
+    var countDown = setInterval(function() {
+
+        var counter = parseInt($("#countdown").html());
+        // console.log(counter);
+
+        if (counter !== 0) {
+
+            $("#countdown").html(counter - 1);
+
+        } else if (counter === 0) {
+            alert("You lose!");
+            
+        }
+
+    }, 1000);
+});
+
+
+
 buildQuiz();
+// countdown function is called here,
+// countdown();
 
 submitButton.addEventListener("click", showResults);
